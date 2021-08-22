@@ -90,6 +90,7 @@ namespace _102190190_VoVanThanh.GUI
             this.btn_Sort.TabIndex = 9;
             this.btn_Sort.Text = "Sort";
             this.btn_Sort.UseVisualStyleBackColor = true;
+            this.btn_Sort.Click += new System.EventHandler(this.btn_Sort_Click);
             // 
             // btn_Del
             // 
@@ -100,6 +101,7 @@ namespace _102190190_VoVanThanh.GUI
             this.btn_Del.TabIndex = 8;
             this.btn_Del.Text = "Delete";
             this.btn_Del.UseVisualStyleBackColor = true;
+            this.btn_Del.Click += new System.EventHandler(this.btn_Del_Click);
             // 
             // btn_Edit
             // 
@@ -120,6 +122,7 @@ namespace _102190190_VoVanThanh.GUI
             this.btn_Add.TabIndex = 6;
             this.btn_Add.Text = "Add";
             this.btn_Add.UseVisualStyleBackColor = true;
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
             // tb_Search
             // 
@@ -128,6 +131,7 @@ namespace _102190190_VoVanThanh.GUI
             this.tb_Search.Name = "tb_Search";
             this.tb_Search.Size = new System.Drawing.Size(196, 27);
             this.tb_Search.TabIndex = 14;
+            this.tb_Search.TextChanged += new System.EventHandler(this.tb_Search_TextChanged);
             // 
             // label1
             // 
@@ -157,6 +161,7 @@ namespace _102190190_VoVanThanh.GUI
             this.cbb_MonAn.Name = "cbb_MonAn";
             this.cbb_MonAn.Size = new System.Drawing.Size(207, 28);
             this.cbb_MonAn.TabIndex = 16;
+            this.cbb_MonAn.SelectedIndexChanged += new System.EventHandler(this.cbb_MonAn_SelectedIndexChanged);
             // 
             // _102190190_MF
             // 

@@ -30,6 +30,10 @@ namespace _102190190_VoVanThanh.GUI
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbb_TenNL = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbb_TinhTrang = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.cbb_DVT = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,16 +42,12 @@ namespace _102190190_VoVanThanh.GUI
             this.tb_Ma = new System.Windows.Forms.TextBox();
             this.btn_Ok = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.cbb_TinhTrang = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.tb_TenNL = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.tb_TenNL);
+            this.groupBox1.Controls.Add(this.cbb_TenNL);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.cbb_TinhTrang);
             this.groupBox1.Controls.Add(this.label4);
@@ -67,6 +67,43 @@ namespace _102190190_VoVanThanh.GUI
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nguyên liệu";
             // 
+            // cbb_TenNL
+            // 
+            this.cbb_TenNL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbb_TenNL.FormattingEnabled = true;
+            this.cbb_TenNL.Location = new System.Drawing.Point(159, 80);
+            this.cbb_TenNL.Name = "cbb_TenNL";
+            this.cbb_TenNL.Size = new System.Drawing.Size(269, 28);
+            this.cbb_TenNL.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(22, 83);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(112, 20);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Tên nguyên liệu";
+            // 
+            // cbb_TinhTrang
+            // 
+            this.cbb_TinhTrang.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbb_TinhTrang.FormattingEnabled = true;
+            this.cbb_TinhTrang.Location = new System.Drawing.Point(159, 224);
+            this.cbb_TinhTrang.Name = "cbb_TinhTrang";
+            this.cbb_TinhTrang.Size = new System.Drawing.Size(269, 28);
+            this.cbb_TinhTrang.TabIndex = 16;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(22, 227);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(76, 20);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Tình trạng";
+            // 
             // btn_Cancel
             // 
             this.btn_Cancel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,6 +113,7 @@ namespace _102190190_VoVanThanh.GUI
             this.btn_Cancel.TabIndex = 14;
             this.btn_Cancel.Text = "Cancel";
             this.btn_Cancel.UseVisualStyleBackColor = true;
+            this.btn_Cancel.Click += new System.EventHandler(this.btn_Cancel_Click);
             // 
             // cbb_DVT
             // 
@@ -129,6 +167,7 @@ namespace _102190190_VoVanThanh.GUI
             this.btn_Ok.TabIndex = 6;
             this.btn_Ok.Text = "OK";
             this.btn_Ok.UseVisualStyleBackColor = true;
+            this.btn_Ok.Click += new System.EventHandler(this.btn_Ok_Click);
             // 
             // label1
             // 
@@ -140,42 +179,6 @@ namespace _102190190_VoVanThanh.GUI
             this.label1.TabIndex = 1;
             this.label1.Text = "Mã";
             // 
-            // cbb_TinhTrang
-            // 
-            this.cbb_TinhTrang.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbb_TinhTrang.FormattingEnabled = true;
-            this.cbb_TinhTrang.Location = new System.Drawing.Point(159, 224);
-            this.cbb_TinhTrang.Name = "cbb_TinhTrang";
-            this.cbb_TinhTrang.Size = new System.Drawing.Size(269, 28);
-            this.cbb_TinhTrang.TabIndex = 16;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(22, 227);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(76, 20);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Tình trạng";
-            // 
-            // tb_TenNL
-            // 
-            this.tb_TenNL.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tb_TenNL.Location = new System.Drawing.Point(159, 80);
-            this.tb_TenNL.Name = "tb_TenNL";
-            this.tb_TenNL.Size = new System.Drawing.Size(269, 27);
-            this.tb_TenNL.TabIndex = 18;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(22, 83);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(112, 20);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Tên nguyên liệu";
-            // 
             // _102190190_DF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -184,6 +187,7 @@ namespace _102190190_VoVanThanh.GUI
             this.Controls.Add(this.groupBox1);
             this.Name = "_102190190_DF";
             this.Text = "_102190190_DF";
+            this.Load += new System.EventHandler(this._102190190_DF_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -193,7 +197,6 @@ namespace _102190190_VoVanThanh.GUI
         #endregion
 
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox tb_TenNL;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbb_TinhTrang;
         private System.Windows.Forms.Label label4;
@@ -205,5 +208,6 @@ namespace _102190190_VoVanThanh.GUI
         private System.Windows.Forms.TextBox tb_Ma;
         private System.Windows.Forms.Button btn_Ok;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox cbb_TenNL;
     }
 }

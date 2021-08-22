@@ -27,18 +27,18 @@ namespace _102190190_VoVanThanh.BLL
         }
         private static BLL_R _Instance;
 
-        public List<NguyenLieu> GetListMANL(int ID, string Name)
+        public List<MonAn_NguyenLieu> GetListMANL(int ID, string Name)
         {
-            List<NguyenLieu> list = new List<NguyenLieu>();
+            List<MonAn_NguyenLieu> list = new List<MonAn_NguyenLieu>();
             if (ID == 0 && Name == "")
             {
-                var l = from p in db.NguyenLieus select p;
+                var l = from p in db.MonAn_NguyenLieus select p;
                 list = l.ToList();
             }
             else if (ID == 0 && Name != "")
             {
-                var l = from p in db.NguyenLieus
-                        where (p.TenNguyenLieu.ToUpper().Contains(Name.ToUpper())) 
+                var l = from p in db.MonAn_NguyenLieus
+                        where ((p.NguyenLieu.TenNguyenLieu + p.SoLuong.ToString() + p.DonViTinh).ToUpper().Contains(Name.ToUpper())) 
                         select p;
                 list = l.ToList();
             }
@@ -46,20 +46,60 @@ namespace _102190190_VoVanThanh.BLL
             {
                 if (Name == "")
                 {
-                    var l = from p in db.NguyenLieus
-                            where p.MaNguyenLieu == ID
+                    var l = from p in db.MonAn_NguyenLieus
+                            where p.MaMonAn == ID
                             select p;
                     list = l.ToList();
                 }
                 else
                 {
-                    var l = from p in db.NguyenLieus
-                            where (p.MaNguyenLieu == ID && p.TenNguyenLieu.ToUpper().Contains(Name.ToUpper()))
+                    var l = from p in db.MonAn_NguyenLieus
+                            where (p.MaMonAn == ID && (p.NguyenLieu.TenNguyenLieu + p.SoLuong.ToString() + p.DonViTinh).ToUpper().Contains(Name.ToUpper()))
                             select p;
                     list = l.ToList();
                 }
             }
             return list;
+        }
+
+        public MonAn_NguyenLieu GetMANLByID(string ID)
+        {
+            var m = db.MonAn_NguyenLieus.Where(p => p.Ma == ID).FirstOrDefault();
+            return m;
+        }
+
+        public NguyenLieu GetNLByID(int ID)
+        {
+            var m = db.NguyenLieus.Where(p => p.MaNguyenLieu == ID).FirstOrDefault();
+            return m;
+        }
+
+        public MonAn GetMAByID(int ID)
+        {
+            var m = db.MonAns.Where(p => p.MaMonAn == ID).FirstOrDefault();
+            return m;
+        }
+
+        public void AddMANL(MonAn_NguyenLieu n)
+        {
+            db.MonAn_NguyenLieus.Add(n);
+            db.SaveChanges();
+        }
+
+        //public void EditMANL(NguyenLieu s)
+        //{
+        //    var sv = db.NguyenLieus.Where(p => p.MaNguyenLieu == s.MaNguyenLieu).FirstOrDefault();
+        //    sv.NameSV = s.NameSV;
+        //    sv.Gender = s.Gender;
+        //    sv.NS = s.NS;
+        //    sv.ID_Lop = s.ID_Lop;
+        //    db.SaveChanges();
+        //}
+
+        public void DeleteMANL(string ID)
+        {
+            db.MonAn_NguyenLieus.Remove(GetMANLByID(ID));
+            db.SaveChanges();
         }
     }
 }

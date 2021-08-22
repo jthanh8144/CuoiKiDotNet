@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\BLL_R.cs" />
     <Compile Include="DTO\CBBItem.cs" />
     <Compile Include="DTO\CreateDB.cs" />
     <Compile Include="DTO\MonAn_NguyenLieu.cs" />
@@ -104,8 +105,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

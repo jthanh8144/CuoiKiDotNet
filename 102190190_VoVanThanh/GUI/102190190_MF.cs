@@ -18,6 +18,7 @@ namespace _102190190_VoVanThanh.GUI
         {
             InitializeComponent();
             SetCBBMonAn();
+            SetCBBSort();
         }
 
         private void SetCBBMonAn()
@@ -35,6 +36,103 @@ namespace _102190190_VoVanThanh.GUI
             cbb_MonAn.SelectedIndex = 0;
         }
 
+        private void SetCBBSort()
+        {
+            Data db = new Data();
+            List<string> l = new List<string>();
+            l.AddRange(new string[] { "TenNguyenLieu", "SoLuong", "DonViTinh", "TinhTrang"});
+            int j = 0;
+            foreach (var i in l)
+            {
+                cbb_Sort.Items.Add(new CBBItem
+                {
+                    Value = j++,
+                    Text = i
+                });
+            }
+            cbb_Sort.SelectedIndex = 0;
+        }
 
+        private void ShowDGV()
+        {
+            int i = 1;
+            var l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                    select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+            dataGridView1.DataSource = l.ToList();
+            dataGridView1.Columns["Ma"].Visible = false;
+        }
+
+        private void cbb_MonAn_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ShowDGV();
+        }
+
+        private void tb_Search_TextChanged(object sender, EventArgs e)
+        {
+            ShowDGV();
+        }
+
+        private void btn_Add_Click(object sender, EventArgs e)
+        {
+            _102190190_DF f = new _102190190_DF();
+            if (cbb_MonAn.SelectedIndex == 0)
+            {
+                MessageBox.Show("Please choose one food!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            else
+            {
+                f.aoe("MMA: " + cbb_MonAn.SelectedIndex.ToString());
+                f.reload = ShowDGV;
+                f.Show();
+            }
+        }
+
+        private void btn_Del_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection r = dataGridView1.SelectedRows;
+            if (r.Count == 0)
+            {
+                MessageBox.Show("No rows are selected!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            foreach (DataGridViewRow i in r)
+            {
+                BLL_R.Instance.DeleteMANL(i.Cells["Ma"].Value.ToString());
+            }
+            ShowDGV();
+        }
+
+        private void btn_Sort_Click(object sender, EventArgs e)
+        {
+            switch(((CBBItem)cbb_Sort.SelectedItem).Value)
+            {
+                case 0:
+                    var l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                            orderby p.NguyenLieu.TenNguyenLieu
+                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    dataGridView1.DataSource = l.ToList();
+                    break;
+                case 1:
+                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                            orderby p.SoLuong
+                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    dataGridView1.DataSource = l.ToList();
+                    break;
+                case 2:
+                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                            orderby p.DonViTinh
+                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    dataGridView1.DataSource = l.ToList();
+                    break;
+                case 3:
+                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                        orderby p.NguyenLieu.TinhTrang
+                        select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    dataGridView1.DataSource = l.ToList();
+                    break;
+            }
+            dataGridView1.Columns["Ma"].Visible = false;
+        }
     }
 }
