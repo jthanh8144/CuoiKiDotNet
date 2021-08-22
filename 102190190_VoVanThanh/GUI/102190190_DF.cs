@@ -34,6 +34,7 @@ namespace _102190190_VoVanThanh.GUI
             SetCBBNguyenLieu();
             SetCBBDVT();
             SetCBBTinhTrang();
+            cbb_TinhTrang.Enabled = false;
         }
 
         private void SetCBBNguyenLieu()
@@ -47,7 +48,6 @@ namespace _102190190_VoVanThanh.GUI
                     Text = i.TenNguyenLieu
                 });
             }
-            cbb_TenNL.SelectedIndex = 0;
         }
 
         private void SetCBBDVT()
@@ -80,38 +80,6 @@ namespace _102190190_VoVanThanh.GUI
                 new CBBItem { Value = 0, Text = "Đã nhập hàng" },
                 new CBBItem { Value = 1, Text = "Chưa nhập hàng" }
             });
-            cbb_TinhTrang.SelectedIndex = 0;
-        }
-
-        private void _102190190_DF_Load(object sender, EventArgs e)
-        {
-            if (Ma == "MMA")
-            {
-                cbb_TenNL.SelectedIndex = -1;
-            }
-            else
-            {
-
-            }
-        }
-
-        private MonAn_NguyenLieu getInfo()
-        {
-            MonAn_NguyenLieu s = new MonAn_NguyenLieu();
-            s.Ma = tb_Ma.Text;
-            s.NguyenLieu = BLL_R.Instance.GetNLByID(((CBBItem)cbb_TenNL.SelectedItem).Value);
-            s.SoLuong = Convert.ToInt32(tb_SL.Text);
-            s.DonViTinh = ((CBBItem)cbb_DVT.SelectedItem).Text.ToString();
-            if (((CBBItem)cbb_TinhTrang.SelectedItem).Value == 0)
-            {
-                s.NguyenLieu.TinhTrang = true;
-            }
-            else
-            {
-                s.NguyenLieu.TinhTrang = false;
-            }
-            s.MonAn = BLL_R.Instance.GetMAByID(Convert.ToInt32(Ma.Substring(3, Ma.Length - 4)));
-            return s;
         }
 
         private void AddMANL()
@@ -131,20 +99,51 @@ namespace _102190190_VoVanThanh.GUI
                     status = false;
                     return;
                 }
+                if (i.MaMonAn == Convert.ToInt32(Ma.Substring(5)) 
+                    && i.MaNguyenLieu == ((CBBItem)cbb_TenNL.SelectedItem).Value)
+                {
+                    MessageBox.Show("Nguyên liệu đã tồn tại trong món ăn!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    status = false;
+                    return;
+                }
             }
-            BLL_R.Instance.AddMANL(getInfo());
+            MonAn_NguyenLieu s = new MonAn_NguyenLieu();
+            s.Ma = tb_Ma.Text;
+            s.SoLuong = Convert.ToInt32(tb_SL.Text);
+            s.DonViTinh = ((CBBItem)cbb_DVT.SelectedItem).Text.ToString();
+            s.MaNguyenLieu = ((CBBItem)cbb_TenNL.SelectedItem).Value;
+            s.MaMonAn = Convert.ToInt32(Ma.Substring(5));
+            BLL_R.Instance.AddMANL(s);
             status = true;
+        }
+
+        private void EditMANL()
+        {
+            MonAn_NguyenLieu s = new MonAn_NguyenLieu();
+            s.Ma = tb_Ma.Text;
+            s.SoLuong = Convert.ToInt32(tb_SL.Text);
+            s.DonViTinh = ((CBBItem)cbb_DVT.SelectedItem).Text.ToString();
+            s.MaNguyenLieu = ((CBBItem)cbb_TenNL.SelectedItem).Value;
+            s.MaMonAn = BLL_R.Instance.GetMANLByID(tb_Ma.Text).MaMonAn;
+            if (((CBBItem)cbb_TinhTrang.SelectedItem).Value == 0)
+            {
+                BLL_R.Instance.EditMANL(s, true);
+            }
+            else
+            {
+                BLL_R.Instance.EditMANL(s, false);
+            }
         }
 
         private void btn_Ok_Click(object sender, EventArgs e)
         {
-            if (Ma == "MMA")
+            if (Ma.Substring(0, 3) == "MMA")
             {
                 AddMANL();
             }
             else
             {
-
+                EditMANL();
             }
             if (status == true)
             {
@@ -156,6 +155,43 @@ namespace _102190190_VoVanThanh.GUI
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
             Dispose();
+        }
+
+        private void _102190190_DF_Load(object sender, EventArgs e)
+        {
+            if (Ma.Substring(0, 3) == "MMN")
+            {
+                MonAn_NguyenLieu m = BLL_R.Instance.GetMANLByID(Ma.Substring(5));
+                cbb_TinhTrang.Enabled = true;
+                tb_Ma.Enabled = false;
+                tb_Ma.Text = m.Ma;
+                for (int i = 0; i < cbb_TenNL.Items.Count; i++)
+                {
+                    if (m.MaNguyenLieu == ((CBBItem)cbb_TenNL.Items[i]).Value)
+                    {
+                        cbb_TenNL.SelectedIndex = i;
+                        break;
+                    }
+                }
+                tb_SL.Text = m.SoLuong.ToString();
+                for (int i = 0; i < cbb_DVT.Items.Count; i++)
+                {
+                    if (m.DonViTinh == ((CBBItem)cbb_DVT.Items[i]).Text)
+                    {
+                        cbb_DVT.SelectedIndex = i;
+                        break;
+                    }
+                }
+                bool stt = BLL_R.Instance.GetNLByID(BLL_R.Instance.GetMANLByID(Ma.Substring(5)).MaNguyenLieu).TinhTrang;
+                if (Convert.ToInt32(stt) == 1)
+                {
+                    cbb_TinhTrang.SelectedIndex = 0;
+                }
+                else
+                {
+                    cbb_TinhTrang.SelectedIndex = 1;
+                }
+            }
         }
     }
 }

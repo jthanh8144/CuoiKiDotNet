@@ -24,7 +24,7 @@ namespace _102190190_VoVanThanh.GUI
         private void SetCBBMonAn()
         {
             Data db = new Data();
-            cbb_MonAn.Items.Add(new CBBItem { Value = 0, Text = "Tất cả" });
+            cbb_MonAn.Items.Add(new CBBItem { Value = 0, Text = "All" });
             foreach (MonAn i in db.MonAns)
             {
                 cbb_MonAn.Items.Add(new CBBItem
@@ -87,6 +87,26 @@ namespace _102190190_VoVanThanh.GUI
                 f.Show();
             }
         }
+        private void btn_Edit_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.Rows.Count == 0)
+            {
+                MessageBox.Show("Select one row to edit!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            DataGridViewSelectedRowCollection r = dataGridView1.SelectedRows;
+            if (r.Count == 1)
+            {
+                _102190190_DF f = new _102190190_DF();
+                f.aoe("MMN: " + r[0].Cells["Ma"].Value.ToString());
+                f.reload = ShowDGV;
+                f.Show();
+            }
+            else
+            {
+                MessageBox.Show("Cannot edit many row!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void btn_Del_Click(object sender, EventArgs e)
         {
@@ -98,7 +118,15 @@ namespace _102190190_VoVanThanh.GUI
             }
             foreach (DataGridViewRow i in r)
             {
-                BLL_R.Instance.DeleteMANL(i.Cells["Ma"].Value.ToString());
+                if (i.Cells["TinhTrang"].Value.ToString() == "True")
+                {
+                    MessageBox.Show("This item cannot be deleted!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else
+                {
+                    BLL_R.Instance.DeleteMANL(i.Cells["Ma"].Value.ToString());
+                }
             }
             ShowDGV();
         }
@@ -134,5 +162,7 @@ namespace _102190190_VoVanThanh.GUI
             }
             dataGridView1.Columns["Ma"].Visible = false;
         }
+
+        
     }
 }

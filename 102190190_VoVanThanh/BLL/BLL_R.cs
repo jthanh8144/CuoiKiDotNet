@@ -62,9 +62,9 @@ namespace _102190190_VoVanThanh.BLL
             return list;
         }
 
-        public MonAn_NguyenLieu GetMANLByID(string ID)
+        public MonAn_NguyenLieu GetMANLByID(string Ma)
         {
-            var m = db.MonAn_NguyenLieus.Where(p => p.Ma == ID).FirstOrDefault();
+            var m = db.MonAn_NguyenLieus.Where(p => p.Ma == Ma).FirstOrDefault();
             return m;
         }
 
@@ -86,15 +86,16 @@ namespace _102190190_VoVanThanh.BLL
             db.SaveChanges();
         }
 
-        //public void EditMANL(NguyenLieu s)
-        //{
-        //    var sv = db.NguyenLieus.Where(p => p.MaNguyenLieu == s.MaNguyenLieu).FirstOrDefault();
-        //    sv.NameSV = s.NameSV;
-        //    sv.Gender = s.Gender;
-        //    sv.NS = s.NS;
-        //    sv.ID_Lop = s.ID_Lop;
-        //    db.SaveChanges();
-        //}
+        public void EditMANL(MonAn_NguyenLieu s, bool TinhTrang)
+        {
+            var m = db.MonAn_NguyenLieus.Where(p => p.Ma == s.Ma).FirstOrDefault();
+            m.SoLuong = s.SoLuong;
+            m.DonViTinh = s.DonViTinh;
+            m.MaMonAn = s.MaMonAn;
+            m.MaNguyenLieu = s.MaNguyenLieu;
+            GetNLByID(m.MaNguyenLieu).TinhTrang = TinhTrang;
+            db.SaveChanges();
+        }
 
         public void DeleteMANL(string ID)
         {
