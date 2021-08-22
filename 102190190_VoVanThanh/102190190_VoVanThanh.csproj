@@ -62,6 +62,7 @@
     <Compile Include="DTO\Data.cs" />
     <Compile Include="DTO\MonAn.cs" />
     <Compile Include="DTO\NguyenLieu.cs" />
+    <Compile Include="DTO\View.cs" />
     <Compile Include="GUI\102190190_DF.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -62,6 +62,24 @@ namespace _102190190_VoVanThanh.BLL
             return list;
         }
 
+        public List<View> ViewAll(int ID, string Name)
+        {
+            List<View> list = new List<View>();
+            List<MonAn_NguyenLieu> l = GetListMANL(ID, Name);
+            for (int i = 0; i < l.Count; i++)
+            {
+                View v = new View();
+                v.STT = i + 1;
+                v.TenNguyenLieu = l[i].NguyenLieu.TenNguyenLieu;
+                v.SoLuong = l[i].SoLuong;
+                v.DonViTinh = l[i].DonViTinh;
+                v.TinhTrang = l[i].NguyenLieu.TinhTrang;
+                v.Ma = l[i].Ma;
+                list.Add(v);
+            }
+            return list;
+        }
+
         public MonAn_NguyenLieu GetMANLByID(string Ma)
         {
             var m = db.MonAn_NguyenLieus.Where(p => p.Ma == Ma).FirstOrDefault();

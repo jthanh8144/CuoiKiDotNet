@@ -107,9 +107,19 @@ namespace _102190190_VoVanThanh.GUI
                     return;
                 }
             }
+            string SoLuong = tb_SL.Text;
+            for (int i = 0; i < SoLuong.Length; i++)
+            {
+                if (SoLuong[i] < '0' || SoLuong[i] > '9')
+                {
+                    MessageBox.Show("Id sản phẩm không chứa kí tự", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    status = false;
+                    return;
+                }
+            }
             MonAn_NguyenLieu s = new MonAn_NguyenLieu();
             s.Ma = tb_Ma.Text;
-            s.SoLuong = Convert.ToInt32(tb_SL.Text);
+            s.SoLuong = Convert.ToInt32(SoLuong);
             s.DonViTinh = ((CBBItem)cbb_DVT.SelectedItem).Text.ToString();
             s.MaNguyenLieu = ((CBBItem)cbb_TenNL.SelectedItem).Value;
             s.MaMonAn = Convert.ToInt32(Ma.Substring(5));
@@ -119,9 +129,30 @@ namespace _102190190_VoVanThanh.GUI
 
         private void EditMANL()
         {
+            Data db = new Data();
+            foreach (MonAn_NguyenLieu i in db.MonAn_NguyenLieus)
+            {
+                if (i.MaMonAn == Convert.ToInt32(Ma.Substring(5))
+                    && i.MaNguyenLieu == ((CBBItem)cbb_TenNL.SelectedItem).Value)
+                {
+                    MessageBox.Show("Nguyên liệu đã tồn tại trong món ăn!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    status = false;
+                    return;
+                }
+            }
+            string SoLuong = tb_SL.Text;
+            for (int i = 0; i < SoLuong.Length; i++)
+            {
+                if (SoLuong[i] < '0' || SoLuong[i] > '9')
+                {
+                    MessageBox.Show("Id sản phẩm không chứa kí tự", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    status = false;
+                    return;
+                }
+            }
             MonAn_NguyenLieu s = new MonAn_NguyenLieu();
             s.Ma = tb_Ma.Text;
-            s.SoLuong = Convert.ToInt32(tb_SL.Text);
+            s.SoLuong = Convert.ToInt32(SoLuong);
             s.DonViTinh = ((CBBItem)cbb_DVT.SelectedItem).Text.ToString();
             s.MaNguyenLieu = ((CBBItem)cbb_TenNL.SelectedItem).Value;
             s.MaMonAn = BLL_R.Instance.GetMANLByID(tb_Ma.Text).MaMonAn;

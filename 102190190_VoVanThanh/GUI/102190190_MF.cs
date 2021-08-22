@@ -56,8 +56,8 @@ namespace _102190190_VoVanThanh.GUI
         private void ShowDGV()
         {
             int i = 1;
-            var l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
-                    select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+            var l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                    select p;
             dataGridView1.DataSource = l.ToList();
             dataGridView1.Columns["Ma"].Visible = false;
         }
