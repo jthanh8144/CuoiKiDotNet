@@ -1,0 +1,16 @@
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\102190190_VoVanThanh.exe.config
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\102190190_VoVanThanh.exe
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\102190190_VoVanThanh.pdb
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\EntityFramework.dll
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\EntityFramework.SqlServer.dll
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\EntityFramework.xml
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\bin\Debug\EntityFramework.SqlServer.xml
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.csprojAssemblyReference.cache
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\_102190190_VoVanThanh.GUI._102190190_DF.resources
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\_102190190_VoVanThanh.GUI._102190190_MF.resources
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\_102190190_VoVanThanh.Properties.Resources.resources
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.csproj.GenerateResource.cache
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.csproj.CoreCompileInputs.cache
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.csproj.CopyComplete
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.exe
+D:\VS\C#\Winform\102190190_VoVanThanh\102190190_VoVanThanh\obj\Debug\102190190_VoVanThanh.pdb
