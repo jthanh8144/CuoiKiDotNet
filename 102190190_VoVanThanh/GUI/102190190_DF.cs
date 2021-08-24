@@ -132,7 +132,8 @@ namespace _102190190_VoVanThanh.GUI
             Data db = new Data();
             foreach (MonAn_NguyenLieu i in db.MonAn_NguyenLieus)
             {
-                if (i.MaMonAn == Convert.ToInt32(Ma.Substring(5))
+                //Convert.ToInt32(
+                if (i.MaMonAn == BLL_R.Instance.GetMANLByID(Ma.Substring(5)).MaMonAn
                     && i.MaNguyenLieu == ((CBBItem)cbb_TenNL.SelectedItem).Value)
                 {
                     MessageBox.Show("Nguyên liệu đã tồn tại trong món ăn!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -213,7 +214,7 @@ namespace _102190190_VoVanThanh.GUI
                         break;
                     }
                 }
-                bool stt = BLL_R.Instance.GetNLByID(BLL_R.Instance.GetMANLByID(Ma.Substring(5)).MaNguyenLieu).TinhTrang;
+                bool stt = BLL_R.Instance.GetNLByID(m.MaNguyenLieu).TinhTrang;
                 if (Convert.ToInt32(stt) == 1)
                 {
                     cbb_TinhTrang.SelectedIndex = 0;
