@@ -55,7 +55,6 @@ namespace _102190190_VoVanThanh.GUI
 
         private void ShowDGV()
         {
-            int i = 1;
             var l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
                     select p;
             dataGridView1.DataSource = l.ToList();
@@ -136,27 +135,27 @@ namespace _102190190_VoVanThanh.GUI
             switch(((CBBItem)cbb_Sort.SelectedItem).Value)
             {
                 case 0:
-                    var l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
-                            orderby p.NguyenLieu.TenNguyenLieu
-                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    var l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                            orderby p.TenNguyenLieu
+                            select p;
                     dataGridView1.DataSource = l.ToList();
                     break;
                 case 1:
-                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                    l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
                             orderby p.SoLuong
-                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                            select p;
                     dataGridView1.DataSource = l.ToList();
                     break;
                 case 2:
-                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
-                            orderby p.DonViTinh
-                            select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                        orderby p.DonViTinh
+                            select p;
                     dataGridView1.DataSource = l.ToList();
                     break;
                 case 3:
-                    l = from p in BLL_R.Instance.GetListMANL(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
-                        orderby p.NguyenLieu.TinhTrang
-                        select new { p.NguyenLieu.TenNguyenLieu, p.SoLuong, p.DonViTinh, p.NguyenLieu.TinhTrang, p.Ma };
+                    l = from p in BLL_R.Instance.ViewAll(((CBBItem)cbb_MonAn.SelectedItem).Value, tb_Search.Text)
+                        orderby p.TinhTrang
+                        select p;
                     dataGridView1.DataSource = l.ToList();
                     break;
             }
